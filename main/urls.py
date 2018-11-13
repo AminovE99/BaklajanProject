@@ -22,6 +22,6 @@ import main
 
 urlpatterns = [
     url(r'admin/', admin.site.urls),
-    url(r'^', auth_views.LoginView.as_view(template_name='baklajan/signin.html'), name='main'),
-    url(r'login/',auth_views.LoginView.as_view(template_name='baklajan/signin.html'), name='login')
+    url(r'main/', views.main, name='main'),
+    url(r'login/', auth_views.LoginView.as_view(template_name='baklajan/signin.html'), name='login'),
 ]

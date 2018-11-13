@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js"></script>
+</head>
+<script>
+    let idAndNameForm = "<form>\n" +
+        "    <div class=\"form-row\">\n" +
+        "        <div class=\"col-2\">\n" +
+        "            <input type=\"text\" class=\"form-control\" placeholder=\"Карта\">\n" +
+        "        </div>\n" +
+        "        <div class=\"col-2\">\n" +
+        "            <input type=\"text\" class=\"form-control\" placeholder=\"Фамилия\">\n" +
+        "        </div>";
+    let button = "<div class=\"col-2\" id=\"button_col\">\n" +
+        "                <button type=\"button\" id=\"addButton\" onclick=\"addColumnOfClient()\" class=\"btn btn-success\">Success</button>\n" +
+        "            </div>";
+    let form = "</form>";
+    let i = 0;
+    let remove = "<div class=\"col-1\" id=\"remove\">\n" +
+        "                <i class=\"fas fa-user-times fa-2x \" onclick=\"removeClient()\"></i>\n" +
+        "            </div>";
+
+    function addColumnOfClient() {
+        {# 1. добавить, удалить старый баттон, добавить новый баттон#}
+        let contentTableDiv = document.getElementById("clients");
+        $('#button_col').remove();
+        contentTableDiv.innerHTML += remove;
+        contentTableDiv.innerHTML += idAndNameForm + button + form;
+    }
+</script>
+
+<form role="form" class="form-inline">
+    <table>
+        <tr>
+            <td><input class="form-control" placeholder="id"></td>
+            <td><input class="form-control" placeholder="Имя"></td>
+            <td><button type="submit" class="btn btn-primary">Записать</button></td>
+            <td><i class="fa fa-user-times fa-2x" aria-hidden="true"></i></td>
+        </tr>
+    </table>
+</form>
+</html>

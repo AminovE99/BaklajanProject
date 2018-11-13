@@ -9,4 +9,4 @@ def main(request):
 
 
 def login(request):
-    return render(request, 'baklajan/main_page.html', {})
+    return render(request, 'baklajan/signin.html', {})
