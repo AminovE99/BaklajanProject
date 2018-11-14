@@ -4,8 +4,8 @@
         let idAndNameForm = "<form role=\"form\" class=\"form-inline\">\n" +
             "            <table>\n" +
             "                <tr>\n" +
-            "                    <td><input class=\"form-control\" placeholder=\"id\"></td>\n" +
-            "                    <td><input class=\"form-control\" placeholder=\"Имя\"></td>";
+            "                    <td><input class=\"form-control\" placeholder=\"id\" id = \"id\"></td>\n" +
+            "                    <td><input class=\"form-control\" placeholder=\"Имя\" id = \"name\"></td>";
         let button = "<td>\n" +
             "                        <button type=\"submit\" id=\"button\" onclick=\"addColumnOfClient()\" class=\"btn btn-primary\">Записать</button>\n" +
             "                    </td>";
@@ -16,28 +16,52 @@
         let remove = "<td><i class=\"fa fa-user-times fa-2x\" id=remove aria-hidden=\"true\"></i></td>";
         let i = 0
 
+
         function addColumnOfClient() {
             {# 1. добавить, удалить старый баттон, добавить новый баттон#}
             let contentTableDiv = document.getElementById("clients");
             if (i === 0) {
                 $('#button').remove();
-                $('#remove').append('<i class="fa fa-user-times fa-2x" aria-hidden="true"></i>');
+                $('#remove').append('<i class="fa fa-user-times fa-2x" onclick =\"removeUser()\" aria-hidden="true"></i>');
 
             }
-            else{
-                $('#button').replaceWith('<i class="fa fa-user-times fa-2x" aria-hidden="true"></i>');
+            else {
+                $('#button').replaceWith('<i class="fa fa-user-times fa-2x" onclick = "removeUser()" aria-hidden="true"></i>');
             }
+            let id = document.getElementById("id").value;
+            let name = document.getElementById("name").value;
+            alert(id + name);
+            $('#id').replaceWith('<p>' + id + '.</p>');
+            $('#name').replaceWith('<p>' + name + '</p>');
             i++;
-
             contentTableDiv.innerHTML += idAndNameForm + button + closedTags;
+            sendAjax(id,name);
         }
+
+        function removeUser() {
+            alert('Убрать юзера')
+        }
+
+        function sendAjax(id,userName){
+
+            $.ajax({
+                url: '/main',
+                type: 'POST',
+                data:{
+                    id: id,
+                    userName: userName,
+                }
+            });
+        }
+
+
     </script>
     <div id="clients">
         <form role="form" class="form-inline">
             <table>
                 <tr>
-                    <td><input class="form-control" placeholder="id"></td>
-                    <td><input class="form-control" placeholder="Имя"></td>
+                    <td><input class="form-control" placeholder="id" name="id" id="id"></td>
+                    <td><input class="form-control" placeholder="Имя" name="name" id="name"></td>
                     <td>
                         <button type="submit" id="button" onclick="addColumnOfClient()" class="btn btn-primary">
                             Записать
@@ -48,4 +72,8 @@
             </table>
         </form>
     </div>
+    {% for val in values %}
+        {{ val }}
+
+    {% endfor %}
 {% endblock %}
